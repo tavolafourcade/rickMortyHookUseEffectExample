@@ -40,7 +40,7 @@ class RickMortyClass extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({
-        pagina: data.results
+        personajes: data.results
       })
     })
     .catch(error => console.error(error));
