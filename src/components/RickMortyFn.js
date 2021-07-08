@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function RickMortyFn(){
 
   const [personajes, setPersonajes] = useState([]);
   const [pagina, setPagina] = useState(1);
+
+  //Almacenando la ejecucion del Hook
+  const subtitle = useRef();
+
+  console.log('Subtitle',subtitle);
 
   //Haciendo el fetch (montando el componente, equivalente al componentDidMount)
   useEffect(()=>{
@@ -41,9 +46,16 @@ function RickMortyFn(){
     .catch(error => console.error(error));
   }
 
+  const cambiarH2 = () => {
+    subtitle.current.style.color = 'red';
+    //console.log(subtitle.current.innerText);
+    subtitle.current.innerText = 'Lo cambiamos con useRef';
+  }
+
   return(
     <div>
-      <h2>Soy el componente Morty FUNCTION</h2>
+      <h2 ref={subtitle}>Soy el componente Morty FUNCTION</h2>
+      <button onClick={cambiarH2}>Cambiar al H2</button>
       <ul>
         {personajes.length === 0 && <p>Cargando</p>}
         {
